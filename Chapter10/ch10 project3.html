@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hangman Game</title>
+  <style>
+    .gameArea {
+      text-align: center;
+      font-size: 2em;
+    }
+    .box,
+    .boxD {
+      display: inline-block;
+      padding: 5px;
+    }
+    .boxE {
+      display: inline-block;
+      width: 40px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="gameArea">
+    <div class="score"></div>
+    <div class="puzzle"></div>
+    <div class="letters"></div>
+    <button>Start Game</button>
+  </div>
+
+  <script>
+    // Step 1: Set up an array of words or phrases
+    const wordsArray = ['HELLO', 'WORLD', 'JAVASCRIPT'];
+
+    // Step 2: Create main game object
+    const game = {
+      currentWord: '',
+      lettersArray: [],
+      puzzleArray: [],
+      totalLetters: 0
+    };
+
+    // Step 3: Select page elements
+    const startButton = document.querySelector('button');
+    const scoreDisplay = document.querySelector('.score');
+    const puzzleDisplay = document.querySelector('.puzzle');
+    const lettersDisplay = document.querySelector('.letters');
+
+    // Step 4: Add event listener to Start Game button
+    startButton.addEventListener('click', startGame);
+
+    function startGame() {
+      // Step 5: Hide button, clear game contents, reset total
+      startButton.style.display = 'none';
+      clearContents();
+      game.totalLetters = 0;
+
+      // Get a word from wordsArray and remove it
+      game.currentWord = wordsArray.shift();
+
+      // Step 6: Split word into letters
+      game.lettersArray = game.currentWord.split('');
+
+      // Step 7: Build game board
+      builder();
+    }
+
+    // Step 8: Create function to generate page elements
+    function createElement(type, parent, content, className) {
+      const element = document.createElement(type);
+      element.textContent = content;
+      element.classList.add(className);
+      parent.appendChild(element);
+      return element;
+    }
+
+    // Step 9: Build game board
+    function builder() {
+      clearContents();
+
+      game.lettersArray.forEach(letter => {
+        const newElement = createElement('div', puzzleDisplay, '-', 'boxE');
+        if (letter === ' ') {
+          newElement.textContent = '';
+          newElement.style.border = '1px solid white';
+        } else {
+          game.totalLetters++;
+        }
+        game.puzzleArray.push(newElement);
+      });
+
+      // Step 13: Create elements for each letter
+      for (let i = 65; i <= 90; i++) {
+        const letter = String.fromCharCode(i);
+        const newElement = createElement('div', lettersDisplay, letter, 'box');
+        newElement.addEventListener('click', checker);
+      }
+    }
+
+    // Step 10: Create function to check selected letter
+    function checker(event) {
+      const selectedLetter = event.target;
+      selectedLetter.classList.remove('box');
+      selectedLetter.classList.add('boxD');
+      selectedLetter.removeEventListener('click', checker);
+      selectedLetter.style.backgroundColor = 'lightgray';
+
+      // Step 15: Invoke checkLetter function
+      checkLetter(selectedLetter.textContent);
+    }
+
+    // Step 16: Check if selected letter is in word
+    function checkLetter(letter) {
+      let found = false;
+      game.lettersArray.forEach((solutionLetter, index) => {
+        if (solutionLetter === letter) {
+          game.totalLetters--;
+          game.puzzleArray[index].textContent = letter;
+          found = true;
+        }
+      });
+      updateScore();
+    }
+
+    // Step 17: Update score and check if game is over
+    function updateScore() {
+      scoreDisplay.textContent = `Letters Left: ${game.totalLetters}`;
+      if (game.totalLetters <= 0) {
+        startButton.style.display = 'block';
+      }
+    }
+
+    // Helper function to clear contents
+    function clearContents() {
+      puzzleDisplay.innerHTML = '';
+      lettersDisplay.innerHTML = '';
+      game.puzzleArray = [];
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selecting Page Elements by Tag Name</title>
+</head>
+<body>
+  <div>First element</div>
+  <div>Middle element</div>
+  <div>Last element</div>
+  <script>
+    let elements = document.getElementsByTagName('div');
+    let middleElement = elements[Math.floor(elements.length / 2)];
+    console.log(middleElement);
+  </script>
+</body>
+</html>

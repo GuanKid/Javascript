@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecting Multiple Page Elements by Class Name</title>
+</head>
+<body>
+    <div class="sampleClass">First element</div>
+    <p class="sampleClass">Second element</p>
+    <span class="sampleClass">Third element</span>
+    <div class="sampleClass">Fourth element</div>
+    <script>
+        let elements = document.querySelectorAll('.sampleClass');
+        console.log(Array.from(elements));
+        elements.forEach(element => {
+            console.log(element);
+        });
+    </script>
+</body>
+
+</html>

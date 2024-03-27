@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table with Clickable Rows</title>
+<style>
+  .box {
+    background-color: yellow;
+  }
+</style>
+</head>
+<body>
+  <!-- Step 2: Select the page elements as JavaScript objects -->
+  <table id="myTable"></table>
+  <div id="message"></div>
+
+  <script>
+    // Step 1: Create an array of names
+    const names = ['Alice', 'Bob', 'Charlie', 'David'];
+
+    // Step 3: Add a function to build the page content and invoke it
+    function build() {
+      // Step 4: Create a table named html and loop through the array contents to output them into the table
+      let html = '';
+      names.forEach((name, index) => {
+        html += `<tr data-row="${index}" data-name="${name}" onclick="getData(this)">`;
+        html += `<td class="${index === 2 ? 'box' : ''}">${name}</td>`; // Step 5: Add a class to one of the cells based on index value
+        html += '</tr>';
+      });
+      document.getElementById('myTable').innerHTML = html;
+    }
+    build(); // Invoke the build function
+
+    // Step 9: Create a function named getData to handle click events on table rows
+    function getData(element) {
+      // Step 10: Use getAttribute to get attribute values and store them in variables
+      const rowValue = element.getAttribute('data-row');
+      const nameValue = element.getAttribute('data-name');
+      // Step 11: Output values into the message element
+      document.getElementById('message').innerHTML = `Row: ${rowValue}, Name: ${nameValue}`;
+    }
+  </script>
+</body>
+</html>
