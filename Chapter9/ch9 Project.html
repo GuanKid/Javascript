@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chapter 9 - Project</title>
+</head>
+<body>
+    <div class="output">
+        <h1>Hello</h1>
+        <div>Test</div>
+        <ul>
+          <li id="one">One</li>
+          <li class="red">Two</li>
+        </ul>
+        <div>Test</div>
+      </div>
+    
+      <script>
+        let outputElement = document.querySelector('.output');
+    
+        let mainList = outputElement.querySelector('ul');
+        mainList.id = 'mainList';
+    
+        let divTags = outputElement.getElementsByTagName('div');
+        let divTagsArray = Array.from(divTags).map(tag => tag.tagName);
+        console.log(divTagsArray);
+    
+        let divList = outputElement.getElementsByTagName('div');
+        for (let i = 0; i < divList.length; i++) {
+          divList[i].id = `id${i + 1}`;
+          if (i % 2 === 0) {
+            divList[i].style.color = 'red';
+          } else {
+            divList[i].style.color = 'blue';
+          }
+        }
+      </script>
+</body>
+</html>
