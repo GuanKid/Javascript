@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click Me Game</title>
+    <style>
+        .output {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            margin: auto;
+            text-align: center;
+            position: relative; /* Added for positioning */
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            position: absolute; /* Changed to absolute for positioning */
+            top: 0;
+            left: 0;
+            background-color: red;
+            cursor: pointer; /* Added to indicate clickable */
+            display: none; /* Hidden by default */
+        }
+        .message {
+            text-align: center;
+            padding: 10px;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div class="output"></div>
+    <div class="message">Press to Start</div>
+    <script>
+        // Step 1: Select main elements
+        const output = document.querySelector('.output');
+        const message = document.querySelector('.message');
+    
+        // Step 2: Create clickable box element
+        const box = document.createElement('div');
+        box.classList.add('box');
+        output.appendChild(box);
+    
+        // Step 3: Add instructions to message area
+        message.textContent = 'Press to Start';
+    
+        // Step 4: Initialize game object
+        const game = {
+            start: null
+        };
+    
+        // Step 5: Function to generate random number
+        function getRandomNumber(max) {
+            return Math.floor(Math.random() * max);
+        }
+    
+        // Step 6: Add event listener to start the game
+        box.addEventListener('click', function() {
+            // Hide box element
+            box.style.display = 'none';
+            
+            // Start game
+            if (game.start === null) {
+                message.textContent = 'Loading...';
+            } else {
+                const currentTime = new Date().getTime();
+                const duration = (currentTime - game.start) / 1000;
+                message.textContent = `Your time: ${duration.toFixed(2)} seconds`;
+            }
+    
+            setTimeout(addBox, getRandomNumber(3000)); // Adjust as needed
+        });
+    
+        // Step 8: Function to handle clicks and start the game
+        function addBox() {
+            message.textContent = 'Click it...';
+            game.start = new Date().getTime();
+            box.style.display = 'block';
+    
+            // Step 9: Set random position for the box
+            const maxX = output.clientWidth - box.clientWidth;
+            const maxY = output.clientHeight - box.clientHeight;
+            const randomX = getRandomNumber(maxX);
+            const randomY = getRandomNumber(maxY);
+            box.style.left = `${randomX}px`;
+            box.style.top = `${randomY}px`;
+        }
+    </script>
+    
+</body>
+</html>

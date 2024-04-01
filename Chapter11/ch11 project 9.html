@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS Tester</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-color: white;
+            margin: 10px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box1">
+        <div id="dragme" draggable="true">
+            Drag Me Please!
+        </div>
+    </div>
+    <div class="box" id="box2"></div>
+
+    <script>
+        // Step 1: Select the draggable element
+        const draggable = document.getElementById('dragme');
+
+        // Step 2: Add dragstart event listener
+        draggable.addEventListener('dragstart', (event) => {
+            event.target.style.opacity = '0.5'; // Update opacity
+        });
+
+        // Step 3: Add dragend event listener
+        draggable.addEventListener('dragend', (event) => {
+            event.target.style.opacity = ''; // Reset opacity
+        });
+
+        // Step 4: Select all dropoff boxes
+        const dropoffBoxes = document.querySelectorAll('.box');
+
+        // Step 5: Add event listeners to dropoff boxes
+        dropoffBoxes.forEach(box => {
+            // Step 6: Add dragenter event listener
+            box.addEventListener('dragenter', (event) => {
+                event.target.classList.add('red'); // Add red class
+            });
+
+            // Step 7: Add dragleave event listener
+            box.addEventListener('dragleave', (event) => {
+                event.target.classList.remove('red'); // Remove red class
+            });
+
+            // Step 8: Add drop event listener
+            box.addEventListener('drop', (event) => {
+                event.preventDefault(); // Prevent default action
+                const draggableElement = document.getElementById('dragme');
+                event.target.appendChild(draggableElement); // Append draggable element to event target
+                console.log('Element dropped');
+            });
+
+            // Step 9: Prevent default action for dragover event
+            box.addEventListener('dragover', (event) => {
+                event.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

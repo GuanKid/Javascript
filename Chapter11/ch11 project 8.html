@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Press Detection</title>
+</head>
+<body>
+<div class="output"></div>
+<input type="text" class="input-field">
+<input type="text" class="input-field">
+<script>
+    // Step 1: Select page elements
+    const output = document.querySelector('.output');
+    const inputFields = document.querySelectorAll('.input-field');
+
+    // Step 2 & 3: Add event listeners to all input fields
+    inputFields.forEach(inputField => {
+        // Step 4: Keydown event listener to check for numbers
+        inputField.addEventListener('keydown', event => {
+            if (event.key >= '0' && event.key <= '9') {
+                output.textContent += event.key;
+            }
+        });
+
+        // Step 5: Keyup event listener to output key value to console
+        inputField.addEventListener('keyup', event => {
+            console.log('Key pressed:', event.key);
+        });
+
+        // Step 6: Paste event listener to output 'paste' to console
+        inputField.addEventListener('paste', () => {
+            console.log('Paste detected');
+        });
+    });
+</script>
+</body>
+</html>

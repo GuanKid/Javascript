@@ -1,0 +1,46 @@
+<!-- <!doctype html> <html>
+ <body>
+ <body>
+ <div id="wrapper">JavaScript is fun!</div>
+ <input type="text" name="myNum1" onkeypress="return numCheck()">
+ <input type="text" name="myNum2" onkeypress="return numCheck2()">
+ <script>
+ function numCheck() {
+ message("Number: " + !isNaN(event.key));
+ return !isNaN(event.key);
+ }
+ function numCheck2() {
+ message("Not a number: " + isNaN(event.key));
+ return isNaN(event.key);
+ }
+ function message(m) {
+ document.getElementById('wrapper').innerHTML = m;
+ }
+ </script>
+ </body>
+</html> -->
+
+
+<!doctype html> <html>
+ <body>
+ <body>
+ <div id="wrapper">JavaScript is fun!</div>
+ <input type="text" name="myNum1" onkeypress="return numCheck()"
+onpaste="return false">
+ <input type="text" name="myNum2" onkeypress="return numCheck2()"
+onpaste="return false">
+ <script>
+ function numCheck() {
+ message(!isNaN(event.key));
+ return !isNaN(event.key);
+ }
+ function numCheck2() {
+ message(isNaN(event.key));
+ return isNaN(event.key);
+ }
+ function message(m) {
+ document.getElementById("wrapper").innerHTML = m;
+ }
+ </script>
+ </body>
+</html>

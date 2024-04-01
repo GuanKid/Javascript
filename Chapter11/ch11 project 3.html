@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOMContentLoaded vs onload</title>
+<script>
+  function message(msg, event) {
+    console.log(event, msg);
+  }
+
+  window.onload = function(event) {
+    message('Window Ready', event);
+  };
+
+  document.addEventListener('DOMContentLoaded', function(event) {
+    message('Document Ready', event);
+  });
+</script>
+</head>
+<body>
+  <h1>DOM Content Loaded vs Onload</h1>
+  <p>Check the console for event messages.</p>
+</body>
+</html>

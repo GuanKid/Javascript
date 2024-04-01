@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Divs</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .color-div {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+
+<div class="color-div" id="red">Red</div>
+<div class="color-div" id="blue">Blue</div>
+<div class="color-div" id="green">Green</div>
+<div class="color-div" id="yellow">Yellow</div>
+
+<script>
+  const colorDivs = document.querySelectorAll('.color-div');
+
+  colorDivs.forEach(colorDiv => {
+    colorDiv.addEventListener('click', () => {
+      const colorName = colorDiv.textContent.toLowerCase();
+      document.body.style.backgroundColor = colorName;
+    });
+  });
+</script>
+
+</body>
+</html>

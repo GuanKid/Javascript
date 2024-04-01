@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Element</title>
+    <style>
+        #movingSquare {
+            width: 50px;
+            height: 50px;
+            background-color: purple;
+            position: absolute;
+        }
+
+        #container {
+            width: 800px;
+            height: 400px;
+            border: 2px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="movingSquare"></div>
+    </div>
+
+    <script>
+        // Step 3: Select and store the element
+        const square = document.getElementById('movingSquare');
+
+        // Step 4: Set up object with values
+        const state = {
+            speed: 10,
+            direction: 1,
+            position: 0
+        };
+
+        // Step 5: Add event listener for click event
+        square.addEventListener('click', function() {
+            // Step 6: Set default value for interval counter
+            let counter = 30;
+
+            // Step 7: Set up interval
+            const intervalId = setInterval(function() {
+                // Step 8: Check if counter is less than 1
+                if (counter < 1) {
+                    clearInterval(intervalId); // End interval
+                    return;
+                }
+
+                // Step 9: Check if position needs to change direction
+                if (state.position >= 800 || state.position <= 0) {
+                    state.direction *= -1; // Change direction
+                }
+
+                // Step 10: Update style.left position value
+                state.position += state.speed * state.direction;
+                square.style.left = state.position + 'px';
+
+                // Step 11: Output result to console
+                console.log(`New position: ${state.position}`);
+
+                counter--; // Decrement counter
+            }, 100); // 100ms interval
+        });
+    </script>
+</body>
+</html>

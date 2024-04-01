@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Position Tracker</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 300px;
+            border: 2px solid black;
+            position: relative;
+        }
+        .active {
+            background-color: red;
+        }
+        .output {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        Move your mouse over this area.
+    </div>
+    <div class="output" id="output"></div>
+
+    <script>
+        // Step 2: Select main container element
+        const mainContainer = document.getElementById('mainContainer');
+        const output = document.getElementById('output');
+
+        // Step 3: Add event listeners for mouseover and mouseout
+        mainContainer.addEventListener('mouseover', function() {
+            this.classList.add('active');
+        });
+
+        mainContainer.addEventListener('mouseout', function() {
+            this.classList.remove('active');
+        });
+
+        // Step 4: Add event listener for mousemove
+        mainContainer.addEventListener('mousemove', function(event) {
+            const x = event.clientX;
+            const y = event.clientY;
+            output.textContent = `Mouse position: X ${x}px, Y ${y}px`;
+        });
+    </script>
+</body>
+</html>

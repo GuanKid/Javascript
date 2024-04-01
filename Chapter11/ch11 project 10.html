@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validator</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+        
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        // Step 2: Select the form element
+        const form = document.getElementById('myForm');
+
+        // Step 3: Add submit event listener to the form
+        form.addEventListener('submit', function(event) {
+            // Step 4: Set up default value for error
+            let error = false;
+
+            // Step 5: Create function to check string length
+            function checker(value, fieldName) {
+                console.log(`${fieldName} length: ${value.length}`);
+                if (value.trim().length === 0) {
+                    console.log(`${fieldName} is required`);
+                    error = true;
+                }
+            }
+
+            // Step 6 & 7: Check conditions for each field value
+            const firstName = document.getElementById('firstName').value.trim();
+            checker(firstName, 'First Name');
+
+            const lastName = document.getElementById('lastName').value.trim();
+            checker(lastName, 'Last Name');
+
+            const age = document.getElementById('age').value.trim();
+            if (isNaN(age) || parseInt(age) < 19) {
+                console.log('Age must be 19 or over');
+                error = true;
+            }
+
+            // Step 8: Check if error is true
+            if (error) {
+                console.log('Form submission prevented due to errors');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+</body>
+</html>

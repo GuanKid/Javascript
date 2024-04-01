@@ -1,0 +1,39 @@
+<!doctype html> 
+<html> 
+<head>
+ <title>JS Tester</title>
+</head> 
+<body> 
+ <div class="output1"></div>
+ <input type="text" placeholder="First Name" name="first"><br>
+ <input type="text" placeholder="Last Name" name="last"><br>
+ <script>
+    // Step 1: Put the HTML output element into a variable object
+    const outputElement = document.querySelector('.output1');
+
+    // Step 2: Select both input fields
+    const firstNameInput = document.querySelector("input[name='first']");
+    const lastNameInput = document.querySelector("input[name='last']");
+
+    // Step 3: Add change event listeners to both input fields
+    firstNameInput.addEventListener('change', handleInputChange);
+    lastNameInput.addEventListener('change', handleInputChange);
+
+    // Step 6: Add blur and focus event listeners to both input fields
+    firstNameInput.addEventListener('blur', handleFocusBlur);
+    firstNameInput.addEventListener('focus', handleFocusBlur);
+    lastNameInput.addEventListener('blur', handleFocusBlur);
+    lastNameInput.addEventListener('focus', handleFocusBlur);
+
+    // Step 4: Function to handle the output of content to the page
+    function handleInputChange(event) {
+        outputElement.textContent = `${firstNameInput.value} ${lastNameInput.value}`;
+    }
+
+    // Step 6: Function to log blur and focus events to the console
+    function handleFocusBlur(event) {
+        console.log(event.type);
+    }
+</script>
+</body>
+</html>
