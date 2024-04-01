@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<title>JavaScript</title>
+<style>
+.ready {
+    background-color: #ddd;
+    color: red;
+    text-decoration: line-through;
+}
+</style>
+</head>
+<body>
+<div class="main">
+    <input id="newItemInput" placeholder="New Item" maxlength="30">
+    <button id="addItemBtn">Add</button>
+</div>
+<ul class="output" id="taskList">
+</ul>
+<script>
+    // Step 1: Select page elements as JavaScript objects
+    const newItemInput = document.getElementById('newItemInput');
+    const addItemBtn = document.getElementById('addItemBtn');
+    const taskList = document.getElementById('taskList');
+
+    // Step 2: Load tasks array from local storage or create an empty array
+    let tasks = JSON.parse(localStorage.getItem('tasklist')) || [];
+
+    // Step 3: Function to build task item and add it to the page
+    function buildTask(task) {
+        const listItem = document.createElement('li');
+        listItem.textContent = task.name;
+        if (task.checked) {
+            listItem.classList.add('ready');
+        }
+        listItem.addEventListener('click', function() {
+            listItem.classList.toggle('ready');
+            task.checked = !task.checked;
+            saveTasks();
+        });
+        taskList.appendChild(listItem);
+    }
+
+    // Step 6: Function to rebuild tasks array from visual list
+    function buildTasksArray() {
+        tasks = [];
+        const listItems = document.querySelectorAll('#taskList li');
+        listItems.forEach(function(item) {
+            const task = {
+                name: item.textContent,
+                checked: item.classList.contains('ready')
+            };
+            tasks.push(task);
+        });
+        saveTasks();
+    }
+
+    // Step 7: Function to save tasks array to local storage
+    function saveTasks() {
+        localStorage.setItem('tasklist', JSON.stringify(tasks));
+    }
+
+    // Step 5: Event listener for adding new task
+    addItemBtn.addEventListener('click', function() {
+        const itemName = newItemInput.value.trim();
+        if (itemName !== '') {
+            const newTask = { name: itemName, checked: false };
+            tasks.push(newTask);
+            buildTask(newTask);
+            newItemInput.value = '';
+            saveTasks();
+        }
+    });
+
+    // Step 4: Load tasks on page load
+    window.onload = function() {
+        tasks.forEach(function(task) {
+            buildTask(task);
+        });
+    };
+
+</script>
+</body>
+</html>

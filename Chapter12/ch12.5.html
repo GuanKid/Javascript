@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>exercise 12.5</h1>
+    <script>
+        // Step 1: Define a custom error class
+class NotANumberError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'NotANumberError';
+    }
+}
+
+// Step 2-6: Create the function with try, catch, and finally blocks
+function checkNumber(val) {
+    try {
+        // Step 3: Check if val is a number
+        if (isNaN(val)) {
+            throw new NotANumberError('The value is not a number.');
+        } else {
+            // Step 3: Output message if val is a number
+            console.log('Got a number');
+        }
+    } catch (error) {
+        // Step 4: Catch and output errors
+        console.error(error.name + ':', error.message);
+    } finally {
+        // Step 5: Output the value of val regardless of error
+        console.log('Value:', val);
+    }
+}
+
+// Step 6: Call the function with string and number arguments
+checkNumber('Hello'); // Should throw an error
+checkNumber(42);      // Should output "Got a number"
+
+    </script>
+</body>
+</html>

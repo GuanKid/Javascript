@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<title>JavaScript Course</title>
+<style>
+.hide {
+    display: none;
+}
+.error {
+    color: red;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    font-style: italic;
+}
+input {
+    border-color: #ddd;
+    width: 400px;
+    display: block;
+    font-size: 1.5em;
+}
+</style>
+</head>
+<body>
+<form name="myform">
+    Email: <input type="text" name="email"> <span class="error hide"></span><br>
+    Password: <input type="password" name="password"> <span class="error hide"></span><br>
+    User Name: <input type="text" name="userName"> <span class="error hide"></span><br>
+    <input type="submit" value="Sign Up">
+</form>
+<script>
+    // Step 1: Select page elements as JavaScript objects
+    const form = document.forms.myform;
+    const errorElements = document.querySelectorAll('.error');
+
+    // Step 2: Add event listener to form submission
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Step 3: Hide all error messages
+        errorElements.forEach(function(error) {
+            error.classList.add('hide');
+        });
+
+        // Step 4: Validate email
+        const emailInput = form.email.value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput)) {
+            showError(form.email, 'Invalid email address');
+            return;
+        }
+
+        // Step 7: Validate password
+        const passwordInput = form.password.value;
+        const passwordRegex = /^[a-zA-Z0-9]{3,8}$/;
+        if (!passwordRegex.test(passwordInput)) {
+            showError(form.password, 'Password must be 3-8 characters long and contain only letters and numbers');
+            return;
+        }
+
+        // Step 8: Create form data object
+        const formData = {};
+        Array.from(form.elements).forEach(function(element) {
+            if (element.tagName === 'INPUT') {
+                formData[element.name] = element.value;
+            }
+        });
+
+        // Step 9: Submit form data
+        console.log('Form data:', formData);
+    });
+
+    // Step 5: Error handling function
+    function showError(input, message) {
+        const errorElement = input.nextElementSibling;
+        errorElement.textContent = message;
+        errorElement.classList.remove('hide');
+        input.focus();
+    }
+</script>
+</body>
+</html>

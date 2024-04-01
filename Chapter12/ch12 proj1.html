@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<title>Complete JavaScript Course</title>
+</head>
+<body>
+<textarea name="txtarea" id="txtarea" rows=2 cols=50></textarea> <button id="extractBtn">Get Emails</button>
+<textarea name="txtarea2" id="txtarea2" rows=2 cols=50></textarea>
+<script>
+    // Step 1: Select page elements as JavaScript objects
+    const textarea = document.getElementById('txtarea');
+    const extractBtn = document.getElementById('extractBtn');
+    const resultTextarea = document.getElementById('txtarea2');
+
+    // Step 2: Add event listener to the button
+    extractBtn.addEventListener('click', extractEmails);
+
+    function extractEmails() {
+        // Step 3: Get the content of the first textarea and extract email addresses
+        const content = textarea.value;
+        const emails = content.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g);
+
+        if (!emails) {
+            resultTextarea.value = 'No emails found.';
+            return;
+        }
+
+        // Step 4: Remove duplicates
+        const uniqueEmails = [];
+
+        // Step 5: Loop through email addresses and add unique ones to the holder array
+        emails.forEach(function(email) {
+            if (!uniqueEmails.includes(email)) {
+                uniqueEmails.push(email);
+            }
+        });
+
+        // Step 6: Output the unique email addresses to the second textarea
+        resultTextarea.value = uniqueEmails.join('\n');
+    }
+</script>
+</body>
+</html>

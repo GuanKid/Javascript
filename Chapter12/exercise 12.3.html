@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12</title>
+</head>
+<body>
+    <h1>exercise 12.3</h1>
+    <script>
+        function getLastArgument() {
+    let lastOne = '';
+
+    // Step 1: Iterate through the arguments object
+    for (let i = 0; i < arguments.length; i++) {
+        // Step 3: Set lastOne to the current value of the argument
+        lastOne = arguments[i];
+    }
+
+    // Step 4: Return the value of lastOne
+    return lastOne;
+}
+
+// Step 5: Output the response
+const result = getLastArgument('First', 'Second', 'Third', 'Last');
+console.log('Last argument:', result);
+
+    </script>
+</body>
+</html>

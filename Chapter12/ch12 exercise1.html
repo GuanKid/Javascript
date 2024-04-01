@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<title>Complete JavaScript Course</title>
+</head>
+<body>
+<div id="output">Complete JavaScript Course</div>
+Search for:
+<input id="sText" type="text">
+<br> Replace with:
+<input id="rText" type="text">
+<br>
+<button id="replaceButton">Replace</button>
+<script>
+    // Step 1: Selecting elements
+    const outputElement = document.getElementById('output');
+    const searchTextElement = document.getElementById('sText');
+    const replaceTextElement = document.getElementById('rText');
+    const replaceButton = document.getElementById('replaceButton');
+
+    // Step 2: Adding event listener
+    replaceButton.addEventListener('click', lookup);
+
+    // Step 3-6: Function to find and replace text
+    function lookup() {
+        let s = outputElement.textContent; // Step 3
+        let rt = searchTextElement.value; // Step 3
+
+        let regex = new RegExp(rt, 'g'); // Step 4
+        let matches = s.match(regex); // Step 4
+
+        if (matches) { // Step 4
+            s = s.replace(regex, replaceTextElement.value); // Step 5
+            outputElement.textContent = s; // Step 6
+        }
+    }
+</script>
+</body>
+</html>

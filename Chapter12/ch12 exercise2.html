@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<title>JavaScript Course</title>
+<style>
+    .output {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="output"></div>
+<input id="emailInput" type="text" placeholder="Enter Email">
+<button id="checkButton">Check</button>
+<script>
+    // Step 1: Selecting elements
+    const emailInput = document.getElementById('emailInput');
+    const outputDiv = document.querySelector('.output');
+    const checkButton = document.getElementById('checkButton');
+
+    // Step 2: Adding event listener
+    checkButton.addEventListener('click', checkEmail);
+
+    function checkEmail() {
+        // Step 2: Getting the value from the input field
+        const email = emailInput.value.trim();
+        let response = '';
+
+        // Step 3: Testing email format using regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            response = 'Invalid Email';
+            outputDiv.style.color = 'red';
+        } else {
+            // Step 4: If email format is correct
+            response = 'Valid Email';
+            outputDiv.style.color = 'green';
+        }
+
+        // Step 5: Outputting the response value
+        outputDiv.textContent = response;
+    }
+</script>
+</body>
+</html>

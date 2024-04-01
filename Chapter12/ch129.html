@@ -1,0 +1,18 @@
+// Step 1: Create a JSON object
+var jsonObject = [
+    {"name": "Learn JavaScript", "status": true},
+    {"name": "Try JSON", "status": false}
+];
+
+// Step 2: Convert the JSON JavaScript object into a string
+var newStr = JSON.stringify(jsonObject);
+console.log("String representation of JSON object:", newStr);
+
+// Step 3: Convert the string back into an object
+var newObj = JSON.parse(newStr);
+
+// Step 4: Iterate through the items in the newObj and output the results
+console.log("Parsed JSON object:");
+newObj.forEach(function(item) {
+    console.log("Name:", item.name, "- Status:", item.status);
+});

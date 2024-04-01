@@ -1,0 +1,18 @@
+// Step 1: Create a JavaScript object containing JSON formatted data
+var jsonData = {
+    "users": [
+        {"name": "John", "status": "active"},
+        {"name": "Jane", "status": "inactive"},
+        {"name": "Alice", "status": "active"}
+    ]
+};
+
+// Step 2: Create a function to loop through and output the data
+function outputData() {
+    jsonData.users.forEach(function(user) {
+        console.log("Name:", user.name, "- Status:", user.status);
+    });
+}
+
+// Step 3: Invoke the function to output the data
+outputData();
